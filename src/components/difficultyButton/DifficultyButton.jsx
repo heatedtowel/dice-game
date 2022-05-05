@@ -3,7 +3,7 @@ import './assets/css/difficultyButton.css'
 
 const DifficultyButton = ({ difficulty, handleChange }) => {
 
-  const [isActive, setIsActive] = useState(false)
+
 
   const buttonRef = useRef()
 

@@ -22,15 +22,19 @@ const Homepage = () => {
     <>
       <Header />
       <div className='body'>
-        <NumberGenerator randomNumber={randomNumber} />
-        <div>
-          <div className='btn--container'>
-            {difficulties.map((difficulty) => <DifficultyButton key={difficulty} difficulty={difficulty} handleChange={handleChange} />)}
-          </div>
-          <Start setRandomNumber={setRandomNumber} difficulty={difficulty} />
-        </div>
-        <div className='player--container'>
+        <div className='number--container'>
           <Player />
+          <div className='btn--container'>
+            <div>
+              <h3>Best of</h3>
+              <h3>3</h3>
+            </div>
+            <NumberGenerator randomNumber={randomNumber} />
+            <div>
+              {difficulties.map((difficulty) => <DifficultyButton key={difficulty} difficulty={difficulty} handleChange={handleChange} />)}
+            </div>
+            <Start setRandomNumber={setRandomNumber} difficulty={difficulty} />
+          </div>
           <Player />
         </div>
       </div>

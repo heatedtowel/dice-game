@@ -4,10 +4,3 @@
   width: max-content;
   margin: 0 auto;
 }
-
-.btn {
-  font-size: 3vw;
-  border-radius: .5rem;
-  margin-top: 1rem;
-  cursor: pointer;
-}
