@@ -1,0 +1,11 @@
+.body {
+  min-height: 100vh;
+  width: 100%;
+}
+
+.player--container {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 3rem;
+  width: 100%;
+}
