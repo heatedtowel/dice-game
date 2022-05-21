@@ -8,4 +8,11 @@
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
+  gap: 1rem;
+}
+
+.difficulty--container {
+  display: flex;
+  gap: 1rem;
+  margin: 1rem;
 }

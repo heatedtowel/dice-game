@@ -1,9 +1,7 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import './assets/css/difficultyButton.css'
 
-const DifficultyButton = ({ difficulty, handleChange }) => {
-
-
+const DifficultyButton = ({ difficulty, dispatch, ACTIONS }) => {
 
   const buttonRef = useRef()
 
@@ -12,7 +10,7 @@ const DifficultyButton = ({ difficulty, handleChange }) => {
       className='btn'
       ref={buttonRef}
       value={difficulty}
-      onClick={() => handleChange(buttonRef.current.value)}
+      onClick={() => dispatch({ type: ACTIONS.setDifficulty, payload: buttonRef.current.value })}
     >{difficulty}
     </button>
   )

@@ -1,17 +1,17 @@
 import { useState } from "react"
 
-const Dice = ({ die, dispatch, ACTIONS, playerNumber }) => {
+const Dice2 = ({ die, dispatch, ACTIONS }) => {
 
   const [checked, setChecked] = useState(false)
 
   const handleChecked = (die) => {
     try {
       if (!checked) {
-        dispatch({ type: ACTIONS.playerDiceAddition, payload: { die: die, playerNumber: playerNumber } })
+        dispatch({ type: ACTIONS.player2DiceAddition, payload: die })
         setChecked(!checked);
         return
       }
-      dispatch({ type: ACTIONS.playerDiceRemoval, payload: { die: die, playerNumber: playerNumber } })
+      dispatch({ type: ACTIONS.player2DiceRemoval, payload: die })
       setChecked(!checked);
     }
     catch (err) {
@@ -31,4 +31,4 @@ const Dice = ({ die, dispatch, ACTIONS, playerNumber }) => {
   )
 }
 
-export default Dice
+export default Dice2

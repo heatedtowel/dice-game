@@ -1,33 +1,30 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './assets/css/start.css'
 
-const Start = ({ setRandomNumber, difficulty }) => {
-
-  const [isActive, setIsActive] = useState(false)
-
+const Start = ({ dispatch, difficulty, ACTIONS }) => {
 
   const handleStart = (difficulty) => {
     switch (difficulty) {
       case 'easy':
-        setRandomNumber(Math.floor(Math.random() * 20))
+        dispatch({ type: ACTIONS.setInitialNumber, payload: Math.floor(Math.random() * 100) })
         break;
       case 'medium':
-        setRandomNumber(Math.floor(Math.random() * 40))
+        dispatch({ type: ACTIONS.setInitialNumber, payload: Math.floor(Math.random() * 500) })
         break;
       case 'hard':
-        setRandomNumber(Math.floor(Math.random() * 60))
+        dispatch({ type: ACTIONS.setInitialNumber, payload: Math.floor(Math.random() * 1000) })
         break;
 
-      default: setRandomNumber(Math.floor(Math.random() * 20))
+      default: dispatch({ type: ACTIONS.setInitialNumber, payload: Math.floor(Math.random() * 20) })
         break;
-    }
-  }
+    };
+  };
 
   return (
     <>
       <button className='btn' onClick={() => handleStart(difficulty)}>Start</button>
     </>
   )
-}
+};
 
 export default Start
