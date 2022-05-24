@@ -1,10 +1,21 @@
 import Dice from '../dice/Dice'
-import Roll from '../roll/Roll'
 import './assests/css/player.css'
 
 const Player = ({ state, dispatch, ACTIONS, player }) => {
 
-  const dice = ['D4', 'D6', 'D8', 'D10', 'D12', 'D20']
+  const dice = ['4', '6', '8', '10', '12', '20']
+
+  const handleRoll = (state, { selectedDice }) => {
+    const currentValue = state.initialNumber
+    let total = 0
+    for (let dice of selectedDice) {
+      let min = 1;
+      let max = parseInt(dice)
+      let roll = Math.floor(Math.random() * (max - min + 1) + min)
+      total += roll
+    }
+    dispatch({ type: ACTIONS.setInitialNumber, payload: currentValue - total })
+  }
 
   return (
     <div className='player--container'>
@@ -27,7 +38,9 @@ const Player = ({ state, dispatch, ACTIONS, player }) => {
           )
         })}
       </div>
-      <button className='btn'> Roll </button>
+      <button
+        className='btn'
+        onClick={() => handleRoll(state, player)}> Roll </button>
     </div>
   )
 }

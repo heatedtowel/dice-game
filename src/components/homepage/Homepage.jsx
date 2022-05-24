@@ -10,6 +10,7 @@ import './assets/css/homepage.css';
 const Homepage = () => {
   const difficulties = ['easy', 'medium', 'hard'];
   const ACTIONS = {
+    reset: 'reset',
     setDifficulty: 'setDifficulty',
     setInitialNumber: 'setInitialNumber',
     playerDiceAddition: 'playerDiceAddition',
@@ -19,24 +20,33 @@ const Homepage = () => {
   }
 
   const initialState = {
+    start: false,
     difficulty: 'easy',
     initialNumber: 0,
     player1: new PlayerModel(1),
-    player2: new PlayerModel(2)
+    player2: new PlayerModel(2),
+    turn: 'player1'
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
 
   function reducer(state, action) {
     switch (action.type) {
+      case 'reset':
+        return {
+          ...state,
+          start: false,
+          difficulty: 'easy',
+          initialNumber: 0,
+          turn: 'player1'
+        };
       case 'setDifficulty':
         return { ...state, difficulty: action.payload };
       case 'setInitialNumber':
         return {
           ...state,
+          start: true,
           initialNumber: action.payload,
-          player1: { ...state.player1, remainder: action.payload },
-          player2: { ...state.player2, remainder: action.payload }
         };
       case 'playerDiceAddition':
         let diceAddition = {
@@ -57,9 +67,17 @@ const Homepage = () => {
         }
         return diceRemoval
       case 'player1Roll':
-        return { ...state, player1: { ...state.player1, roll: action.payload } };
+        return {
+          ...state,
+          player1: { ...state.player1, roll: action.payload },
+          turn: 'player2'
+        };
       case 'player2Roll':
-        return { ...state, player2: { ...state.player2, roll: action.payload } };
+        return {
+          ...state,
+          player2: { ...state.player2, roll: action.payload },
+          turn: 'player1'
+        };
       default:
         throw new Error();
     };
@@ -87,13 +105,14 @@ const Homepage = () => {
                 <DifficultyButton
                   key={difficulty}
                   difficulty={difficulty}
+                  state={state}
                   dispatch={dispatch}
                   ACTIONS={ACTIONS}
                 />
               )}
             </div>
             <Start
-              difficulty={state.difficulty}
+              state={state}
               dispatch={dispatch}
               ACTIONS={ACTIONS} />
           </div>

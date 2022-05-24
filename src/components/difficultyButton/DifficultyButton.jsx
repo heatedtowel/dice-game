@@ -1,16 +1,22 @@
 import React, { useRef } from 'react'
 import './assets/css/difficultyButton.css'
 
-const DifficultyButton = ({ difficulty, dispatch, ACTIONS }) => {
+const DifficultyButton = ({ difficulty, state, dispatch, ACTIONS }) => {
 
   const buttonRef = useRef()
+
+  const handleClick = (start) => {
+    if (!start) {
+      dispatch({ type: ACTIONS.setDifficulty, payload: buttonRef.current.value })
+    }
+  }
 
   return (
     <button
       className='btn'
       ref={buttonRef}
       value={difficulty}
-      onClick={() => dispatch({ type: ACTIONS.setDifficulty, payload: buttonRef.current.value })}
+      onClick={() => handleClick(state.start)}
     >{difficulty}
     </button>
   )

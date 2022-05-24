@@ -26,7 +26,7 @@ const Dice = ({ die, dispatch, ACTIONS, playerNumber }) => {
         checked={checked}
         onChange={() => handleChecked(die)}
       />
-      {die}
+      D{die}
     </label>
   )
 }

@@ -1,28 +1,36 @@
 import React from 'react';
 import './assets/css/start.css'
 
-const Start = ({ dispatch, difficulty, ACTIONS }) => {
+const Start = ({ dispatch, state, ACTIONS }) => {
 
   const handleStart = (difficulty) => {
-    switch (difficulty) {
-      case 'easy':
-        dispatch({ type: ACTIONS.setInitialNumber, payload: Math.floor(Math.random() * 100) })
-        break;
-      case 'medium':
-        dispatch({ type: ACTIONS.setInitialNumber, payload: Math.floor(Math.random() * 500) })
-        break;
-      case 'hard':
-        dispatch({ type: ACTIONS.setInitialNumber, payload: Math.floor(Math.random() * 1000) })
-        break;
+    if (state.start !== true) {
+      switch (difficulty) {
+        case 'easy':
+          dispatch({ type: ACTIONS.setInitialNumber, payload: Math.floor(Math.random() * 50) })
+          break;
+        case 'medium':
+          dispatch({ type: ACTIONS.setInitialNumber, payload: Math.floor(Math.random() * 100) })
+          break;
+        case 'hard':
+          dispatch({ type: ACTIONS.setInitialNumber, payload: Math.floor(Math.random() * 200) })
+          break;
 
-      default: dispatch({ type: ACTIONS.setInitialNumber, payload: Math.floor(Math.random() * 20) })
-        break;
-    };
+        default:
+          dispatch({ type: ACTIONS.setInitialNumber, payload: Math.floor(Math.random() * 50) })
+          break;
+      };
+    }
   };
+
+  const handleReset = () => {
+    dispatch({ type: ACTIONS.reset })
+  }
 
   return (
     <>
-      <button className='btn' onClick={() => handleStart(difficulty)}>Start</button>
+      <button className='btn' onClick={() => handleStart(state.difficulty)}>Start</button>
+      <button className='btn' onClick={() => handleReset(state.difficulty)}>Restart</button>
     </>
   )
 };
