@@ -15,8 +15,7 @@ const Homepage = () => {
     setInitialNumber: 'setInitialNumber',
     playerDiceAddition: 'playerDiceAddition',
     playerDiceRemoval: 'playerDiceRemoval',
-    player1Roll: 'player1Roll',
-    player2Roll: 'player2Roll'
+    playerRoll: 'playerRoll',
   }
 
   const initialState = {
@@ -25,7 +24,7 @@ const Homepage = () => {
     initialNumber: 0,
     player1: new PlayerModel(1),
     player2: new PlayerModel(2),
-    turn: 'player1'
+    turn: 1
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -38,7 +37,7 @@ const Homepage = () => {
           start: false,
           difficulty: 'easy',
           initialNumber: 0,
-          turn: 'player1'
+          turn: 1
         };
       case 'setDifficulty':
         return { ...state, difficulty: action.payload };
@@ -66,18 +65,12 @@ const Homepage = () => {
           selectedDice: [...state[`player${action.payload.playerNumber}`].selectedDice.filter(dice => dice !== action.payload.die)]
         }
         return diceRemoval
-      case 'player1Roll':
+      case 'playerRoll':
         return {
           ...state,
-          player1: { ...state.player1, roll: action.payload },
-          turn: 'player2'
-        };
-      case 'player2Roll':
-        return {
-          ...state,
-          player2: { ...state.player2, roll: action.payload },
-          turn: 'player1'
-        };
+          initialNumber: action.payload.newNumber,
+          turn: action.payload.turn
+        }
       default:
         throw new Error();
     };
