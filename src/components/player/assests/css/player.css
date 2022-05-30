@@ -1,6 +1,5 @@
 .player--container {
   display: flex;
-  width: 50vw;
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;

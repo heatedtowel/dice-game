@@ -5,18 +5,13 @@ const Dice = ({ die, dispatch, ACTIONS, playerNumber }) => {
   const [checked, setChecked] = useState(false)
 
   const handleChecked = (die) => {
-    try {
-      if (!checked) {
-        dispatch({ type: ACTIONS.playerDiceAddition, payload: { die: die, playerNumber: playerNumber } })
-        setChecked(!checked);
-        return
-      }
-      dispatch({ type: ACTIONS.playerDiceRemoval, payload: { die: die, playerNumber: playerNumber } })
+    if (!checked) {
+      dispatch({ type: ACTIONS.playerDiceAddition, payload: { die: die, playerNumber: playerNumber } })
       setChecked(!checked);
+      return
     }
-    catch (err) {
-      console.log(err)
-    }
+    dispatch({ type: ACTIONS.playerDiceRemoval, payload: { die: die, playerNumber: playerNumber } })
+    setChecked(!checked);
   };
 
   return (

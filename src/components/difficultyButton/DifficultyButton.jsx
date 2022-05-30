@@ -13,7 +13,7 @@ const DifficultyButton = ({ difficulty, state, dispatch, ACTIONS }) => {
 
   return (
     <button
-      className='btn'
+      className={state.difficulty === difficulty ? 'btn-selected' : 'btn-unselected'}
       ref={buttonRef}
       value={difficulty}
       onClick={() => handleClick(state.start)}

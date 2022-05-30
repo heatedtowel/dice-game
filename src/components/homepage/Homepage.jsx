@@ -16,11 +16,12 @@ const Homepage = () => {
     playerDiceAddition: 'playerDiceAddition',
     playerDiceRemoval: 'playerDiceRemoval',
     playerRoll: 'playerRoll',
+    win: 'win',
   }
 
   const initialState = {
     start: false,
-    difficulty: 'easy',
+    difficulty: '',
     initialNumber: 0,
     player1: new PlayerModel(1),
     player2: new PlayerModel(2),
@@ -33,11 +34,11 @@ const Homepage = () => {
     switch (action.type) {
       case 'reset':
         return {
-          ...state,
-          start: false,
-          difficulty: 'easy',
-          initialNumber: 0,
-          turn: 1
+          ...initialState
+        };
+      case 'win':
+        return {
+          ...initialState
         };
       case 'setDifficulty':
         return { ...state, difficulty: action.payload };
@@ -70,7 +71,7 @@ const Homepage = () => {
           ...state,
           initialNumber: action.payload.newNumber,
           turn: action.payload.turn
-        }
+        };
       default:
         throw new Error();
     };
