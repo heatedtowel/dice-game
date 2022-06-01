@@ -6,7 +6,7 @@ const Start = ({ dispatch, state, ACTIONS }) => {
 
   const handleStart = (difficulty) => {
     let min;
-    if (state.start !== true) {
+    if (state.start !== true && state.difficulty !== '') {
       switch (difficulty) {
         case 'easy':
           min = 1
@@ -43,7 +43,7 @@ const Start = ({ dispatch, state, ACTIONS }) => {
       </button>
       <button
         className='btn'
-        onClick={() => handleReset(state.difficulty)}
+        onClick={() => handleReset()}
       ><VscDebugRestart />
       </button>
     </>

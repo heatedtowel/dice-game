@@ -1,17 +1,24 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
-const Dice = ({ die, dispatch, ACTIONS, playerNumber }) => {
-
+const Dice = ({ start, die, dispatch, ACTIONS, playerNumber, selectedDice }) => {
   const [checked, setChecked] = useState(false)
 
-  const handleChecked = (die) => {
-    if (!checked) {
-      dispatch({ type: ACTIONS.playerDiceAddition, payload: { die: die, playerNumber: playerNumber } })
-      setChecked(!checked);
-      return
+  useEffect(() => {
+    setChecked(false)
+  }, [start])
+
+  const handleChecked = (die, start) => {
+    if (start) {
+      if (!checked && selectedDice.length <= 2) {
+        dispatch({ type: ACTIONS.playerDiceAddition, payload: { die: die, playerNumber: playerNumber } })
+        setChecked(!checked);
+        return
+      }
+      if (checked) {
+        dispatch({ type: ACTIONS.playerDiceRemoval, payload: { die: die, playerNumber: playerNumber } })
+        setChecked(!checked);
+      }
     }
-    dispatch({ type: ACTIONS.playerDiceRemoval, payload: { die: die, playerNumber: playerNumber } })
-    setChecked(!checked);
   };
 
   return (
@@ -19,7 +26,7 @@ const Dice = ({ die, dispatch, ACTIONS, playerNumber }) => {
       <input
         type="checkbox"
         checked={checked}
-        onChange={() => handleChecked(die)}
+        onClick={() => handleChecked(die, start)}
       />
       D{die}
     </label>

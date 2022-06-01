@@ -1,11 +1,10 @@
 import Dice from '../dice/Dice'
 import './assests/css/player.css'
 
-const Player = ({ state, dispatch, ACTIONS, player }) => {
-  const { playerNumber, selectedDice } = player
+const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice } }) => {
   const dice = ['4', '6', '8', '10', '12', '20']
 
-  const handleClick = (state, selectedDice) => {
+  const handleRoll = (state, selectedDice) => {
     const { start, turn, initialNumber } = state
 
     if (selectedDice.length > 0 && start) {
@@ -73,7 +72,9 @@ const Player = ({ state, dispatch, ACTIONS, player }) => {
           return (
             <Dice
               die={die}
+              start={state.start}
               playerNumber={playerNumber}
+              selectedDice={selectedDice}
               dispatch={dispatch}
               ACTIONS={ACTIONS}
             />
@@ -83,7 +84,7 @@ const Player = ({ state, dispatch, ACTIONS, player }) => {
       <button
         disabled={handleDisabled(state)}
         className='btn'
-        onClick={() => handleClick(state, selectedDice)}
+        onClick={() => handleRoll(state, selectedDice)}
       > Roll
       </button>
     </div>
