@@ -26,7 +26,7 @@ const Dice = ({ start, die, dispatch, ACTIONS, playerNumber, selectedDice }) => 
       <input
         type="checkbox"
         checked={checked}
-        onClick={() => handleChecked(die, start)}
+        onChange={() => handleChecked(die, start)}
       />
       D{die}
     </label>

@@ -13,3 +13,8 @@
   align-items: flex-start;
   gap: 1rem;
 }
+
+.rollValues {
+  display: flex;
+  gap: 2rem;
+}

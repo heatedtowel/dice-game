@@ -1,8 +1,11 @@
+import { useState } from 'react'
 import Dice from '../dice/Dice'
 import './assests/css/player.css'
 
 const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice } }) => {
   const dice = ['4', '6', '8', '10', '12', '20']
+  let [diceRolls, setDiceRolls] = useState([])
+
 
   const handleRoll = (state, selectedDice) => {
     const { start, turn, initialNumber } = state
@@ -18,14 +21,17 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
       }
 
       const roll = () => {
+        let currentRoll = []
         let rollTotal = 0
 
         for (let dice of selectedDice) {
           let min = 1;
           let max = parseInt(dice)
           let roll = Math.floor(Math.random() * (max - min + 1) + min)
+          currentRoll.push(roll)
           rollTotal += roll
         }
+        setDiceRolls(currentRoll)
 
         if ((currentValue - rollTotal) < 0) {
           return dispatch({
@@ -49,6 +55,7 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
       }
 
       roll()
+      console.log('Roll Map', diceRolls.map((roll => console.log(roll))))
     }
   }
 
@@ -87,6 +94,14 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
         onClick={() => handleRoll(state, selectedDice)}
       > Roll
       </button>
+      <div className='rollValues'>
+        {diceRolls.map((roll => {
+          console.log(roll)
+          return (
+            <button>{roll}</button>
+          )
+        }))}
+      </div>
     </div>
   )
 }

@@ -14,6 +14,7 @@ const DifficultyButton = ({ difficulty, state, dispatch, ACTIONS }) => {
   return (
     <button
       className={state.difficulty === difficulty ? 'btn-selected' : 'btn-unselected'}
+      disabled={state.difficulty !== difficulty && state.start}
       ref={buttonRef}
       value={difficulty}
       onClick={() => handleClick(state.start)}
