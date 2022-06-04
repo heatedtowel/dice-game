@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react"
+import './css/dice.css'
 
 const Dice = ({ start, die, dispatch, ACTIONS, playerNumber, selectedDice }) => {
   const [checked, setChecked] = useState(false)
@@ -22,14 +23,25 @@ const Dice = ({ start, die, dispatch, ACTIONS, playerNumber, selectedDice }) => 
   };
 
   return (
-    <label>
+    // <label>
+    //   <input
+    //     type="checkbox"
+    //     checked={checked}
+    //     onChange={() => handleChecked(die, start)}
+    //   />
+    //   D{die}
+    // </label>
+    <>
       <input
+        id={playerNumber + die}
         type="checkbox"
+        name={playerNumber + die}
         checked={checked}
-        onChange={() => handleChecked(die, start)}
-      />
-      D{die}
-    </label>
+        onChange={() => handleChecked(die, start)} />
+      <div class="label">
+        <label for={playerNumber + die}>D{die}</label>
+      </div>
+    </>
   )
 }
 

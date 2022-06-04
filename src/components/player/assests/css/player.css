@@ -10,11 +10,17 @@
   display: flex;
   flex-flow: column wrap;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 1rem;
 }
 
 .rollValues {
   display: flex;
   gap: 2rem;
+}
+
+.diceResult {
+  font-size: 3vw;
+  padding: .3rem 1rem;
+  border-radius: .5rem;
 }

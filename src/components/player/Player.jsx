@@ -1,10 +1,17 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Dice from '../dice/Dice'
 import './assests/css/player.css'
 
 const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice } }) => {
   const dice = ['4', '6', '8', '10', '12', '20']
   let [diceRolls, setDiceRolls] = useState([])
+
+  useEffect(() => {
+    if (state.start !== true) {
+      setDiceRolls([])
+    }
+  }, [state.start])
+
 
 
   const handleRoll = (state, selectedDice) => {
@@ -98,7 +105,7 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
         {diceRolls.map((roll => {
           console.log(roll)
           return (
-            <button>{roll}</button>
+            <button className='diceResult'>{roll}</button>
           )
         }))}
       </div>

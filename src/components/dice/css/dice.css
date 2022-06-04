@@ -1,0 +1,30 @@
+div.label {
+  font-size: 1vw;
+  width: 3vw;
+  margin-top: .5rem;
+  border: solid .2rem gray;
+  border-radius: .5rem;
+  -webkit-font-smoothing: antialiased;
+  color: gray;
+  text-align: center;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+input[type=checkbox] {
+  display: none;
+}
+
+input:checked+div {
+  border: solid 1px red;
+  color: #F00;
+}
+
+/* input:checked+div:before {
+  content: "\2713";
+} */

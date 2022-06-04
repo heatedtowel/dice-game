@@ -5,9 +5,9 @@ import DifficultyButton from '../difficultyButton/DifficultyButton';
 import Start from '../start/Start.jsx';
 import PlayerModel from '../../models/player'
 import Player from '../player/Player.jsx';
-import './assets/css/homepage.css';
+import './assets/css/gameboard.css';
 
-const Homepage = () => {
+const Gameboard = () => {
   const difficulties = ['easy', 'medium', 'hard'];
   const ACTIONS = {
     reset: 'reset',
@@ -122,4 +122,4 @@ const Homepage = () => {
   )
 };
 
-export default Homepage
+export default Gameboard

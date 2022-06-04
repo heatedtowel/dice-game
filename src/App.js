@@ -1,5 +1,5 @@
 import './App.css';
-import Homepage from './components/homepage/Homepage'
+import Gameboard from './components/gameboard/Gameboard'
 
 
 
@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       <div className="App-body">
-        <Homepage />
+        <Gameboard />
       </div>
     </div>
   );
