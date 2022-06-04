@@ -3,8 +3,8 @@ import Dice from '../dice/Dice'
 import './assests/css/player.css'
 
 const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice } }) => {
-  const dice = ['4', '6', '8', '10', '12', '20']
   let [diceRolls, setDiceRolls] = useState([])
+  const dice = ['4', '6', '8', '10', '12', '20']
 
   useEffect(() => {
     if (state.start !== true) {
@@ -50,7 +50,7 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
           })
         }
         if ((currentValue - rollTotal) === 0) {
-          return dispatch({ type: ACTIONS.win })
+          return dispatch({ type: ACTIONS.win, payload: { winner: state.turn } })
         }
         return dispatch({
           type: ACTIONS.playerRoll,
@@ -62,7 +62,6 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
       }
 
       roll()
-      console.log('Roll Map', diceRolls.map((roll => console.log(roll))))
     }
   }
 

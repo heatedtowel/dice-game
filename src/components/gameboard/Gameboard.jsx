@@ -5,6 +5,8 @@ import DifficultyButton from '../difficultyButton/DifficultyButton';
 import Start from '../start/Start.jsx';
 import PlayerModel from '../../models/player'
 import Player from '../player/Player.jsx';
+import WinScreen from '../winScreen/WinScreen';
+
 import './assets/css/gameboard.css';
 
 const Gameboard = () => {
@@ -25,7 +27,8 @@ const Gameboard = () => {
     initialNumber: 0,
     player1: new PlayerModel(1),
     player2: new PlayerModel(2),
-    turn: 1
+    turn: 1,
+    winner: null
   };
 
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -38,7 +41,8 @@ const Gameboard = () => {
         };
       case 'win':
         return {
-          ...initialState
+          ...initialState,
+          winner: action.payload.winner
         };
       case 'setDifficulty':
         return { ...state, difficulty: action.payload };
@@ -81,6 +85,7 @@ const Gameboard = () => {
     <>
       <Header />
       <div className='body'>
+        {state.winner && <WinScreen state={state} dispatch={dispatch} ACTIONS={ACTIONS} />}
         <div className='number--container'>
           <Player
             state={state}
