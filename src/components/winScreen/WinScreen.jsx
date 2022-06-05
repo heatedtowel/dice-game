@@ -1,3 +1,4 @@
+import Confetti from 'react-confetti'
 import './css/winScreen.css'
 
 const WinScreen = ({ state, dispatch, ACTIONS }) => {
@@ -7,6 +8,7 @@ const WinScreen = ({ state, dispatch, ACTIONS }) => {
 
   return (
     <div className="winOverlay">
+      <Confetti />
       <div className='win--container'>
         <h1>Congratulations</h1>
         <h1>Player {state.turn}</h1>
