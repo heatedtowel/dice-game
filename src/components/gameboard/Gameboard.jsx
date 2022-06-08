@@ -1,25 +1,18 @@
-import { useReducer } from 'react';
+import { useState, useReducer } from 'react';
 import Header from '../header/Header';
 import NumberGenerator from '../numberGenerator/NumberGenerator.jsx';
 import DifficultyButton from '../difficultyButton/DifficultyButton';
 import Start from '../start/Start.jsx';
-import PlayerModel from '../../models/player'
 import Player from '../player/Player.jsx';
 import WinScreen from '../winScreen/WinScreen';
+import Info from '../info/Info'
+import PlayerModel from '../../models/player'
+
 
 import './assets/css/gameboard.css';
 
 const Gameboard = () => {
-  const difficulties = ['easy', 'medium', 'hard'];
-  const ACTIONS = {
-    reset: 'reset',
-    setDifficulty: 'setDifficulty',
-    setInitialNumber: 'setInitialNumber',
-    playerDiceAddition: 'playerDiceAddition',
-    playerDiceRemoval: 'playerDiceRemoval',
-    playerRoll: 'playerRoll',
-    win: 'win',
-  }
+  const [hasSetName, setHasSetName] = useState(false)
 
   const initialState = {
     start: false,
@@ -31,8 +24,19 @@ const Gameboard = () => {
     winner: null
   };
 
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const difficulties = ['easy', 'medium', 'hard'];
+  const ACTIONS = {
+    reset: 'reset',
+    setDifficulty: 'setDifficulty',
+    setInitialNumber: 'setInitialNumber',
+    playerDiceAddition: 'playerDiceAddition',
+    playerDiceRemoval: 'playerDiceRemoval',
+    playerRoll: 'playerRoll',
+    win: 'win',
+  }
 
+
+  const [state, dispatch] = useReducer(reducer, initialState);
   function reducer(state, action) {
     switch (action.type) {
       case 'reset':
@@ -84,8 +88,15 @@ const Gameboard = () => {
   return (
     <>
       <Header />
+      {!hasSetName ? <Info initialState={initialState} setHasSetName={setHasSetName} /> : null}
       <div className='body'>
-        {state.winner && <WinScreen state={state} dispatch={dispatch} ACTIONS={ACTIONS} />}
+        {state.winner &&
+          <WinScreen
+            state={state}
+            dispatch={dispatch}
+            ACTIONS={ACTIONS}
+            setHasSetName={setHasSetName}
+          />}
         <div className='number--container'>
           <Player
             state={state}
@@ -113,7 +124,8 @@ const Gameboard = () => {
             <Start
               state={state}
               dispatch={dispatch}
-              ACTIONS={ACTIONS} />
+              ACTIONS={ACTIONS}
+              setHasSetName={setHasSetName} />
           </div>
           <Player
             state={state}

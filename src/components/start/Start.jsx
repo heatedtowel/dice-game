@@ -2,7 +2,7 @@ import React from 'react';
 import { VscDebugRestart } from 'react-icons/vsc'
 import './assets/css/start.css'
 
-const Start = ({ dispatch, state, ACTIONS }) => {
+const Start = ({ dispatch, state, ACTIONS, setHasSetName }) => {
 
   const handleStart = (difficulty) => {
     let min;
@@ -30,6 +30,7 @@ const Start = ({ dispatch, state, ACTIONS }) => {
   };
 
   const handleReset = () => {
+    setHasSetName(false)
     dispatch({ type: ACTIONS.reset })
   }
 

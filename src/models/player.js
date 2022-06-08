@@ -1,5 +1,6 @@
 export default class Player {
   constructor(playerNumber) {
+    this.name = ''
     this.selectedDice = []
     this.playerNumber = playerNumber
   }
@@ -10,5 +11,9 @@ export default class Player {
 
   setSelectedDice(selectedDice) {
     this.selectedDice = selectedDice
+  }
+
+  setName(name) {
+    this.name = name
   }
 }

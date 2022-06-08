@@ -23,14 +23,6 @@ const Dice = ({ start, die, dispatch, ACTIONS, playerNumber, selectedDice }) => 
   };
 
   return (
-    // <label>
-    //   <input
-    //     type="checkbox"
-    //     checked={checked}
-    //     onChange={() => handleChecked(die, start)}
-    //   />
-    //   D{die}
-    // </label>
     <>
       <input
         id={playerNumber + die}
@@ -38,7 +30,7 @@ const Dice = ({ start, die, dispatch, ACTIONS, playerNumber, selectedDice }) => 
         name={playerNumber + die}
         checked={checked}
         onChange={() => handleChecked(die, start)} />
-      <div class="label">
+      <div className="label">
         <label for={playerNumber + die}>D{die}</label>
       </div>
     </>

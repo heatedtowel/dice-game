@@ -1,8 +1,9 @@
 import Confetti from 'react-confetti'
 import './css/winScreen.css'
 
-const WinScreen = ({ state, dispatch, ACTIONS }) => {
+const WinScreen = ({ state, dispatch, ACTIONS, setHasSetName }) => {
   const handleReset = () => {
+    setHasSetName(false)
     dispatch({ type: ACTIONS.reset })
   }
 

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import Dice from '../dice/Dice'
 import './assests/css/player.css'
 
-const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice } }) => {
+const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice, name } }) => {
   let [diceRolls, setDiceRolls] = useState([])
   const dice = ['4', '6', '8', '10', '12', '20']
 
@@ -75,24 +75,27 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
   return (
     <div className='player--container'>
       <div>
-        <h2>Player {playerNumber}</h2>
-      </div>
-      <div>
-        <h3>Available Dice</h3>
+        <h2>{name}</h2>
       </div>
       <div className='dice--container'>
-        {dice.map((die) => {
-          return (
-            <Dice
-              die={die}
-              start={state.start}
-              playerNumber={playerNumber}
-              selectedDice={selectedDice}
-              dispatch={dispatch}
-              ACTIONS={ACTIONS}
-            />
-          )
-        })}
+        <div className='dice-title'>
+          <h3>Available Dice</h3>
+        </div>
+        <div className='dice'>
+          {dice.map((die) => {
+            return (
+              <Dice
+                key={die}
+                die={die}
+                start={state.start}
+                playerNumber={playerNumber}
+                selectedDice={selectedDice}
+                dispatch={dispatch}
+                ACTIONS={ACTIONS}
+              />
+            )
+          })}
+        </div>
       </div>
       <button
         disabled={handleDisabled(state)}
@@ -102,7 +105,6 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
       </button>
       <div className='rollValues'>
         {diceRolls.map((roll => {
-          console.log(roll)
           return (
             <button className='diceResult'>{roll}</button>
           )
