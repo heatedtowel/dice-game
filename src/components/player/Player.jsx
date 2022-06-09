@@ -50,7 +50,8 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
           })
         }
         if ((currentValue - rollTotal) === 0) {
-          return dispatch({ type: ACTIONS.win, payload: { winner: state.turn } })
+          console.log(name)
+          return dispatch({ type: ACTIONS.win, payload: { winner: name } })
         }
         return dispatch({
           type: ACTIONS.playerRoll,
@@ -100,7 +101,7 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
       <button
         disabled={handleDisabled(state)}
         className='btn'
-        onClick={() => handleRoll(state, selectedDice)}
+        onClick={() => handleRoll(state, selectedDice, name)}
       > Roll
       </button>
       <div className='rollValues'>

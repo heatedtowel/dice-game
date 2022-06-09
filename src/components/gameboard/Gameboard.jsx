@@ -88,53 +88,58 @@ const Gameboard = () => {
   return (
     <>
       <Header />
-      {!hasSetName ? <Info initialState={initialState} setHasSetName={setHasSetName} /> : null}
-      <div className='body'>
-        {state.winner &&
-          <WinScreen
-            state={state}
-            dispatch={dispatch}
-            ACTIONS={ACTIONS}
-            setHasSetName={setHasSetName}
-          />}
-        <div className='number--container'>
-          <Player
-            state={state}
-            player={state.player1}
-            dispatch={dispatch}
-            ACTIONS={ACTIONS}
-          />
-          <div className='btn--container'>
-            <div>
-              <h3>Best of</h3>
-              <h3>3</h3>
-            </div>
-            <NumberGenerator randomNumber={state.initialNumber} />
-            <div className='difficulty--container'>
-              {difficulties.map((difficulty) =>
-                <DifficultyButton
-                  key={difficulty}
-                  difficulty={difficulty}
-                  state={state}
-                  dispatch={dispatch}
-                  ACTIONS={ACTIONS}
-                />
-              )}
-            </div>
-            <Start
-              state={state}
+      {!hasSetName ?
+        <Info
+          initialState={initialState}
+          setHasSetName={setHasSetName}
+        /> :
+        <div className='body'>
+          {state.winner &&
+            <WinScreen
+              winner={state.winner}
               dispatch={dispatch}
               ACTIONS={ACTIONS}
-              setHasSetName={setHasSetName} />
+              setHasSetName={setHasSetName}
+            />}
+          <div className='number--container'>
+            <Player
+              state={state}
+              player={state.player1}
+              dispatch={dispatch}
+              ACTIONS={ACTIONS}
+            />
+            <div className='btn--container'>
+              <div>
+                <h3>Best of</h3>
+                <h3>3</h3>
+              </div>
+              <NumberGenerator randomNumber={state.initialNumber} />
+              <div className='difficulty--container'>
+                {difficulties.map((difficulty) =>
+                  <DifficultyButton
+                    key={difficulty}
+                    difficulty={difficulty}
+                    state={state}
+                    dispatch={dispatch}
+                    ACTIONS={ACTIONS}
+                  />
+                )}
+              </div>
+              <Start
+                state={state}
+                dispatch={dispatch}
+                ACTIONS={ACTIONS}
+                setHasSetName={setHasSetName} />
+            </div>
+            <Player
+              state={state}
+              player={state.player2}
+              dispatch={dispatch}
+              ACTIONS={ACTIONS}
+            />
           </div>
-          <Player
-            state={state}
-            player={state.player2}
-            dispatch={dispatch}
-            ACTIONS={ACTIONS}
-          />
-        </div>
-      </div >
+        </div >}
+
     </>
   )
 };

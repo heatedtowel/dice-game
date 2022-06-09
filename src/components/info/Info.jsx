@@ -18,7 +18,7 @@ const WinScreen = ({ initialState, setHasSetName }) => {
 
   return (
     <div className="winOverlay">
-      <div className='win--container'>
+      <div className='info--container'>
         <form>
           <div>
             <h1>Player 1</h1>
