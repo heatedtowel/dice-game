@@ -42,12 +42,14 @@ const WinScreen = ({ initialState, setHasSetName }) => {
           <div>
             <h1>Player 1</h1>
             <input
+              style={{ color: (player1Name.length > 3) ? 'green' : 'red' }}
               type="text"
               placeholder='please choose a name'
               onChange={(e) => setplayer1Name(e.target.value)}
             />
             <h1>Player 2</h1>
             <input
+              style={{ color: (player1Name.length > 3) ? 'green' : 'red' }}
               type="text"
               placeholder='please choose a name'
               onChange={(e) => setplayer2Name(e.target.value)}
