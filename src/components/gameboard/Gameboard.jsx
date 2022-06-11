@@ -5,7 +5,7 @@ import DifficultyButton from '../difficultyButton/DifficultyButton';
 import Start from '../start/Start.jsx';
 import Player from '../player/Player.jsx';
 import WinScreen from '../winScreen/WinScreen';
-import Info from '../info/Info'
+import PlayerInfo from '../playerInfo/PlayerInfo'
 import PlayerModel from '../../models/player'
 
 
@@ -13,6 +13,25 @@ import './assets/css/gameboard.css';
 
 const Gameboard = () => {
   const [hasSetName, setHasSetName] = useState(false)
+
+  // const gameBoardVariant = {
+  //   aboutMe: {
+  //     card: {
+  //       opacity: 1,
+  //       x: 0,
+  //       backgroundColor: theme ? '#417257e3' : '#0c494fc0',
+  //       borderRadius: '1rem',
+  //       fontWeight: 500,
+  //       transition: {
+  //         y: { duration: .5 },
+  //         opacity: { duration: 1 },
+  //         borderRadius: { duration: 2 },
+  //         backgroundColor: { duration: .5 },
+  //         fontWeight: { duration: 1.5 }
+  //       }
+  //     }
+  //   },
+  // }
 
   const initialState = {
     start: false,
@@ -34,7 +53,6 @@ const Gameboard = () => {
     playerRoll: 'playerRoll',
     win: 'win',
   }
-
 
   const [state, dispatch] = useReducer(reducer, initialState);
   function reducer(state, action) {
@@ -89,7 +107,7 @@ const Gameboard = () => {
     <>
       <Header />
       {!hasSetName ?
-        <Info
+        <PlayerInfo
           initialState={initialState}
           setHasSetName={setHasSetName}
         /> :
