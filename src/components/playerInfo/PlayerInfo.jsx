@@ -49,17 +49,19 @@ const WinScreen = ({ initialState, setHasSetName }) => {
             />
             <h1>Player 2</h1>
             <input
-              style={{ color: (player1Name.length > 3) ? 'green' : 'red' }}
+              style={{ color: (player2Name.length > 3) ? 'green' : 'red' }}
               type="text"
               placeholder='please choose a name'
               onChange={(e) => setplayer2Name(e.target.value)}
             />
           </div>
-          <button
+          <motion.button
+            className='infoBtn'
             type="button"
+            whileHover={{ scale: [1, 1.2, 1], transition: { repeat: Infinity } }}
             onClick={() => handleLogin(player1Name, player2Name)}
           >Start Game
-          </button>
+          </motion.button>
         </form>
       </motion.div>
     </div >
