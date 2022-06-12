@@ -12,8 +12,6 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
     }
   }, [state.start])
 
-
-
   const handleRoll = (state, selectedDice) => {
     const { start, turn, initialNumber } = state
 

@@ -2,11 +2,12 @@ div.label {
   font-size: 1vw;
   width: 3vw;
   margin-top: .5rem;
-  border: solid .2rem gray;
+  border: solid .2rem rgb(129, 129, 129);
   border-radius: .5rem;
   -webkit-font-smoothing: antialiased;
-  color: gray;
+  color: rgb(225, 224, 224);
   text-align: center;
+  transition: all .5s;
 }
 
 label {
@@ -21,10 +22,6 @@ input[type=checkbox] {
 }
 
 input:checked+div {
-  border: solid 1px red;
-  color: #F00;
+  border: solid .2rem rgb(31, 160, 29);
+  color: rgb(31, 160, 29);
 }
-
-/* input:checked+div:before {
-  content: "\2713";
-} */

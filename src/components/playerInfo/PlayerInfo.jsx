@@ -38,18 +38,20 @@ const WinScreen = ({ initialState, setHasSetName }) => {
         variants={playerInfoVariant}
         animate='container'
       >
-        <form>
+        <form
+          onSubmit={() => handleLogin(player1Name, player2Name)}
+        >
           <div>
             <h1>Player 1</h1>
             <input
-              style={{ color: (player1Name.length > 3) ? 'green' : 'red' }}
+              style={{ color: (player1Name.length >= 3) ? 'green' : 'red' }}
               type="text"
               placeholder='please choose a name'
               onChange={(e) => setplayer1Name(e.target.value)}
             />
             <h1>Player 2</h1>
             <input
-              style={{ color: (player2Name.length > 3) ? 'green' : 'red' }}
+              style={{ color: (player2Name.length >= 3) ? 'green' : 'red' }}
               type="text"
               placeholder='please choose a name'
               onChange={(e) => setplayer2Name(e.target.value)}
@@ -57,10 +59,9 @@ const WinScreen = ({ initialState, setHasSetName }) => {
           </div>
           <motion.button
             className='infoBtn'
-            type="button"
+            type="submit"
             whileHover={{ scale: [1, 1.2, 1], transition: { repeat: Infinity } }}
-            onClick={() => handleLogin(player1Name, player2Name)}
-          >Start Game
+          >Continue
           </motion.button>
         </form>
       </motion.div>

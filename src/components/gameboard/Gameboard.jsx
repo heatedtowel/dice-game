@@ -108,10 +108,6 @@ const Gameboard = () => {
               ACTIONS={ACTIONS}
             />
             <div className='btn--container'>
-              <div>
-                <h3>Best of</h3>
-                <h3>3</h3>
-              </div>
               <NumberGenerator randomNumber={state.initialNumber} />
               <div className='difficulty--container'>
                 {difficulties.map((difficulty) =>
