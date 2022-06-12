@@ -1,88 +1,18 @@
-import { useState, useReducer } from 'react';
-import Header from '../header/Header';
-import NumberGenerator from '../numberGenerator/NumberGenerator.jsx';
-import DifficultyButton from '../difficultyButton/DifficultyButton';
-import Start from '../start/Start.jsx';
-import Player from '../player/Player.jsx';
-import WinScreen from '../winScreen/WinScreen';
-import PlayerInfo from '../playerInfo/PlayerInfo'
-import PlayerModel from '../../models/player'
-
-
+import { useState } from 'react';
+import {
+  Header,
+  NumberGenerator,
+  DifficultyButton,
+  Start,
+  Player,
+  WinScreen,
+  PlayerInfo
+} from '../../index'
 import './assets/css/gameboard.css';
 
-const Gameboard = () => {
+const Gameboard = ({ initialState, state, dispatch, ACTIONS }) => {
   const [hasSetName, setHasSetName] = useState(false)
-
-  const initialState = {
-    start: false,
-    difficulty: '',
-    initialNumber: 0,
-    player1: new PlayerModel(1),
-    player2: new PlayerModel(2),
-    turn: 1,
-    winner: null
-  };
-
   const difficulties = ['easy', 'medium', 'hard'];
-  const ACTIONS = {
-    reset: 'reset',
-    setDifficulty: 'setDifficulty',
-    setInitialNumber: 'setInitialNumber',
-    playerDiceAddition: 'playerDiceAddition',
-    playerDiceRemoval: 'playerDiceRemoval',
-    playerRoll: 'playerRoll',
-    win: 'win',
-  }
-
-  const [state, dispatch] = useReducer(reducer, initialState);
-  function reducer(state, action) {
-    switch (action.type) {
-      case 'reset':
-        return {
-          ...initialState
-        };
-      case 'win':
-        return {
-          ...initialState,
-          winner: action.payload.winner
-        };
-      case 'setDifficulty':
-        return { ...state, difficulty: action.payload };
-      case 'setInitialNumber':
-        return {
-          ...state,
-          start: true,
-          initialNumber: action.payload,
-        };
-      case 'playerDiceAddition':
-        let diceAddition = {
-          ...state
-        };
-        diceAddition[`player${action.payload.playerNumber}`] = {
-          ...state[`player${action.payload.playerNumber}`],
-          selectedDice: [...state[`player${action.payload.playerNumber}`].selectedDice, action.payload.die]
-        }
-        return diceAddition
-      case 'playerDiceRemoval':
-        let diceRemoval = {
-          ...state
-        };
-        diceRemoval[`player${action.payload.playerNumber}`] = {
-          ...state[`player${action.payload.playerNumber}`],
-          selectedDice: [...state[`player${action.payload.playerNumber}`].selectedDice.filter(dice => dice !== action.payload.die)]
-        }
-        return diceRemoval
-      case 'playerRoll':
-        return {
-          ...state,
-          initialNumber: action.payload.newNumber,
-          turn: action.payload.turn
-        };
-      default:
-        throw new Error();
-    };
-  };
 
   return (
     <>

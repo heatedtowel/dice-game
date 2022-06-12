@@ -3,7 +3,6 @@ import './css/dice.css'
 
 const Dice = ({ start, die, dispatch, ACTIONS, playerNumber, selectedDice }) => {
   const [checked, setChecked] = useState(false)
-  console.log(start)
   useEffect(() => {
     setChecked(false)
   }, [start])

@@ -48,7 +48,6 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
           })
         }
         if ((currentValue - rollTotal) === 0) {
-          console.log(name)
           return dispatch({ type: ACTIONS.win, payload: { winner: name } })
         }
         return dispatch({
