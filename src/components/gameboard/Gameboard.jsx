@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import {
-  Header,
+  Shop,
   NumberGenerator,
   DifficultyButton,
   Start,
@@ -8,7 +8,7 @@ import {
   WinScreen,
   PlayerInfo
 } from '../../index'
-import './assets/css/gameboard.css';
+import './css/gameboard.css';
 
 const Gameboard = ({ initialState, state, dispatch, ACTIONS }) => {
   const [hasSetName, setHasSetName] = useState(false)
@@ -16,7 +16,6 @@ const Gameboard = ({ initialState, state, dispatch, ACTIONS }) => {
 
   return (
     <>
-      <Header />
       {!hasSetName ?
         <PlayerInfo
           initialState={initialState}
@@ -30,6 +29,7 @@ const Gameboard = ({ initialState, state, dispatch, ACTIONS }) => {
               ACTIONS={ACTIONS}
               setHasSetName={setHasSetName}
             />}
+          <Shop />
           <div className='number--container'>
             <Player
               state={state}

@@ -33,15 +33,11 @@ export function reducer(state, action) {
       };
     case 'reset':
       return {
-        ...initialState,
-        ...state.player1,
-        ...state.player2
-      };
+        ...initialState
+      }
     case 'win':
       return {
         ...initialState,
-        ...state.player1,
-        ...state.player2,
         winner: payload.winner
       };
     case 'setDifficulty':

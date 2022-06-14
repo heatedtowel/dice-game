@@ -81,7 +81,6 @@ const Player = ({ state, dispatch, ACTIONS, player }) => {
       <div className='dice--container'>
         <div className='dice-title'>
           <h3>Available Dice</h3>
-          <h3>{player.tokens}</h3>
         </div>
         <div className='dice'>
           {dice.map((die) => {
@@ -97,6 +96,7 @@ const Player = ({ state, dispatch, ACTIONS, player }) => {
             )
           })}
         </div>
+        <h3>Tokens: {player.tokens}</h3>
       </div>
       <button
         disabled={handleDisabled(state)}

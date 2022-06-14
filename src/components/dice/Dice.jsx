@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import './css/dice.css'
 
 const Dice = ({ state, die, dispatch, ACTIONS, player }) => {
-  let { playerNumber, selectedDice, tokens } = player
+  let { playerNumber, tokens } = player
   const [checked, setChecked] = useState(false)
 
   useEffect(() => {

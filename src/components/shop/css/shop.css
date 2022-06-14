@@ -1,0 +1,16 @@
+.shopContainer {
+  border: .1rem solid red;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  padding: .5rem 1rem;
+  width: max-content;
+  margin: auto;
+}
+
+.shopItem {
+  display: flex;
+  gap: 1rem;
+  font-size: 2vh;
+}

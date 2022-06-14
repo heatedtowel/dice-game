@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
-export { default as Header } from './components/header/Header';
+export { default as Shop } from './components/shop/Shop';
 export { default as NumberGenerator } from './components/numberGenerator/NumberGenerator.jsx';
 export { default as DifficultyButton } from './components/difficultyButton/DifficultyButton';
 export { default as Start } from './components/start/Start.jsx';
