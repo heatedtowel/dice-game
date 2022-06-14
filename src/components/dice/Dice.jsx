@@ -1,20 +1,38 @@
 import { useState, useEffect } from "react"
 import './css/dice.css'
 
-const Dice = ({ start, die, dispatch, ACTIONS, playerNumber, selectedDice }) => {
+const Dice = ({ state, die, dispatch, ACTIONS, player }) => {
+  let { playerNumber, selectedDice, tokens } = player
   const [checked, setChecked] = useState(false)
+
   useEffect(() => {
     setChecked(false)
-  }, [start])
+  }, [state.start, state.turn])
 
-  const handleChecked = (die, start) => {
-    if (!checked && selectedDice.length <= 2) {
-      dispatch({ type: ACTIONS.playerDiceAddition, payload: { die: die, playerNumber: playerNumber } })
+  const handleChecked = (die, playerNumber, tokens) => {
+    if (!checked && tokens !== 0) {
+      let newTokens = tokens - 1
+      dispatch({
+        type: ACTIONS.playerDiceAddition,
+        payload: {
+          die: die,
+          playerNumber: playerNumber,
+          tokens: newTokens
+        }
+      })
       setChecked(!checked);
       return
     }
     if (checked) {
-      dispatch({ type: ACTIONS.playerDiceRemoval, payload: { die: die, playerNumber: playerNumber } })
+      let newTokens = tokens + 1
+      dispatch({
+        type: ACTIONS.playerDiceRemoval,
+        payload: {
+          die: die,
+          playerNumber: playerNumber,
+          tokens: newTokens
+        }
+      })
       setChecked(!checked);
     }
   };
@@ -24,10 +42,10 @@ const Dice = ({ start, die, dispatch, ACTIONS, playerNumber, selectedDice }) => 
       <input
         id={playerNumber + die}
         type="checkbox"
-        disabled={!start}
+        disabled={!state.start}
         name={playerNumber + die}
         checked={checked}
-        onChange={() => handleChecked(die, start)}
+        onChange={() => handleChecked(die, playerNumber, tokens)}
       />
       <div className="label">
         <label

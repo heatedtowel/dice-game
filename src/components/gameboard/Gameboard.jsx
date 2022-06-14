@@ -54,7 +54,8 @@ const Gameboard = ({ initialState, state, dispatch, ACTIONS }) => {
                 state={state}
                 dispatch={dispatch}
                 ACTIONS={ACTIONS}
-                setHasSetName={setHasSetName} />
+                setHasSetName={setHasSetName}
+              />
             </div>
             <Player
               state={state}

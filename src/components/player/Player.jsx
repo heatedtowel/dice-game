@@ -2,28 +2,23 @@ import { useState, useEffect } from 'react'
 import Dice from '../dice/Dice'
 import './assests/css/player.css'
 
-const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice, name } }) => {
+const Player = ({ state, dispatch, ACTIONS, player }) => {
+  let { playerNumber, selectedDice, name, tokens } = player
   let [diceRolls, setDiceRolls] = useState([])
   const dice = ['4', '6', '8', '10', '12', '20']
 
   useEffect(() => {
-    if (state.start !== true) {
+    if (!state.start) {
       setDiceRolls([])
     }
   }, [state.start])
 
-  const handleRoll = (state, selectedDice) => {
-    const { start, turn, initialNumber } = state
+
+  const handleRoll = (state, selectedDice, playerName, playerNumber, tokens) => {
+    const { start, initialNumber } = state
 
     if (selectedDice.length > 0 && start) {
       const currentValue = initialNumber
-
-      const determinePlayer = () => {
-        if (turn === 1) {
-          return 2
-        }
-        return 1
-      }
 
       const roll = () => {
         let currentRoll = []
@@ -43,28 +38,36 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
             type: ACTIONS.playerRoll,
             payload: {
               newNumber: currentValue,
-              turn: determinePlayer()
+              playerNumber: playerNumber,
+              turn: playerName,
+              tokens: tokens
             }
           })
         }
         if ((currentValue - rollTotal) === 0) {
-          return dispatch({ type: ACTIONS.win, payload: { winner: name } })
+          return dispatch({
+            type: ACTIONS.win,
+            payload: {
+              winner: playerName
+            }
+          })
         }
         return dispatch({
           type: ACTIONS.playerRoll,
           payload: {
             newNumber: currentValue - rollTotal,
-            turn: determinePlayer()
+            playerNumber: playerNumber,
+            turn: playerName,
+            tokens: tokens
           }
         })
       }
-
       roll()
     }
   }
 
   const handleDisabled = ({ start }) => {
-    if (start && state.turn === playerNumber) {
+    if (start && state.turn !== name) {
       return false
     }
     return true
@@ -78,6 +81,7 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
       <div className='dice--container'>
         <div className='dice-title'>
           <h3>Available Dice</h3>
+          <h3>{player.tokens}</h3>
         </div>
         <div className='dice'>
           {dice.map((die) => {
@@ -85,9 +89,8 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
               <Dice
                 key={die}
                 die={die}
-                start={state.start}
-                playerNumber={playerNumber}
-                selectedDice={selectedDice}
+                state={state}
+                player={player}
                 dispatch={dispatch}
                 ACTIONS={ACTIONS}
               />
@@ -98,7 +101,7 @@ const Player = ({ state, dispatch, ACTIONS, player: { playerNumber, selectedDice
       <button
         disabled={handleDisabled(state)}
         className='btn'
-        onClick={() => handleRoll(state, selectedDice, name)}
+        onClick={() => handleRoll(state, selectedDice, name, playerNumber, tokens)}
       > Roll
       </button>
       <div className='rollValues'>
