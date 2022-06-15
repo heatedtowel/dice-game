@@ -29,7 +29,10 @@ const Gameboard = ({ initialState, state, dispatch, ACTIONS }) => {
               ACTIONS={ACTIONS}
               setHasSetName={setHasSetName}
             />}
-          <Shop />
+          <Shop
+            state={state}
+            dispatch={dispatch}
+            ACTIONS={ACTIONS} />
           <div className='number--container'>
             <Player
               state={state}
@@ -65,7 +68,6 @@ const Gameboard = ({ initialState, state, dispatch, ACTIONS }) => {
             />
           </div>
         </div >}
-
     </>
   )
 };

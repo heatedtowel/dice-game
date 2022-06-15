@@ -17,7 +17,7 @@ const Player = ({ state, dispatch, ACTIONS, player }) => {
   const handleRoll = (state, selectedDice, playerName, playerNumber, tokens) => {
     const { start, initialNumber } = state
 
-    if (selectedDice.length > 0 && start) {
+    if ((selectedDice.length > 0 && start) || tokens === 0) {
       const currentValue = initialNumber
 
       const roll = () => {
@@ -97,6 +97,16 @@ const Player = ({ state, dispatch, ACTIONS, player }) => {
           })}
         </div>
         <h3>Tokens: {player.tokens}</h3>
+        <div className='container'>
+          <h3>Items</h3>
+          <div className='items--container'>
+            {player.items?.map((item) => {
+              return (
+                <h5>{item}</h5>
+              )
+            })}
+          </div>
+        </div>
       </div>
       <button
         disabled={handleDisabled(state)}

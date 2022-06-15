@@ -17,6 +17,8 @@ export const ACTIONS = {
   playerDiceAddition: 'playerDiceAddition',
   playerDiceRemoval: 'playerDiceRemoval',
   playerRoll: 'playerRoll',
+  purchaseItem: 'purchaseItem',
+  useItem: 'useItem',
   win: 'win',
 }
 
@@ -62,6 +64,26 @@ export function reducer(state, action) {
         tokens: payload.tokens
       }
       return diceRemoval
+    case 'purchaseItem':
+      let itemAddition = {
+        ...state,
+      };
+      itemAddition[`player${payload.playerNumber}`] = {
+        ...state[`player${payload.playerNumber}`],
+        items: [...state[`player${payload.playerNumber}`].items, payload.item],
+        tokens: payload.tokens
+      }
+      return itemAddition
+    case 'playerItemRemoval':
+      let ItemRemoval = {
+        ...state,
+      };
+      ItemRemoval[`player${payload.playerNumber}`] = {
+        ...state[`player${payload.playerNumber}`],
+        selectedDice: [...state[`player${payload.playerNumber}`].selectedDice.filter(dice => dice !== payload.die)],
+        tokens: payload.tokens
+      }
+      return ItemRemoval
     case 'playerRoll':
       let playerRoll = {
         ...state,

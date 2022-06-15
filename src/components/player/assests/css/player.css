@@ -3,7 +3,6 @@
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
 }
 
 .dice--container {
@@ -11,7 +10,6 @@
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
 }
 
 .dice {
@@ -32,4 +30,9 @@
   font-size: 3vw;
   padding: .3rem 1rem;
   border-radius: .5rem;
+}
+
+.items--container {
+  display: flex;
+  gap: 1rem
 }

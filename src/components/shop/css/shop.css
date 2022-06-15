@@ -10,7 +10,7 @@
 }
 
 .shopItem {
-  display: flex;
+  /* display: flex; */
   gap: 1rem;
   font-size: 2vh;
 }

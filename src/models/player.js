@@ -3,6 +3,7 @@ export default class Player {
     this.name = ''
     this.selectedDice = []
     this.playerNumber = playerNumber
+    this.items = []
     this.tokens = 0
   }
 
@@ -24,5 +25,13 @@ export default class Player {
 
   setTokens(num) {
     this.tokens = num
+  }
+
+  addItem(newItem) {
+    this.items.push(newItem)
+  }
+
+  removeItem(removedItem) {
+    this.items.filter((item) => item !== removedItem)
   }
 }
