@@ -8,9 +8,9 @@ const Start = ({ dispatch, state, ACTIONS, setHasSetName }) => {
     let min;
     if (state.start !== true && state.difficulty !== '') {
       switch (difficulty) {
-        case 'easy':
-          state.player1.setTokens(2)
-          state.player2.setTokens(2)
+        case 'short':
+          state.player1.setTokens(3)
+          state.player2.setTokens(3)
           min = 1
           dispatch({
             type: ACTIONS.start,
@@ -21,26 +21,26 @@ const Start = ({ dispatch, state, ACTIONS, setHasSetName }) => {
           })
           break;
         case 'medium':
-          state.player1.setTokens(4)
-          state.player2.setTokens(4)
+          state.player1.setTokens(3)
+          state.player2.setTokens(3)
           min = 50
           dispatch({
             type: ACTIONS.start,
             payload: {
               initialNumber: Math.floor(Math.random() * (100 - min + 1) + min),
-              tokensPerTurn: 4
+              tokensPerTurn: 2
             }
           })
           break;
-        case 'hard':
-          state.player1.setTokens(6)
-          state.player2.setTokens(6)
+        case 'long':
+          state.player1.setTokens(3)
+          state.player2.setTokens(3)
           min = 100
           dispatch({
             type: ACTIONS.start,
             payload: {
               initialNumber: Math.floor(Math.random() * (200 - min + 1) + min),
-              tokensPerTurn: 6
+              tokensPerTurn: 2
             }
           })
           break;

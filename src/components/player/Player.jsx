@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react'
+import { motion } from 'framer-motion'
 import PlayerItems from '../playerItems/PlayerItems'
 import Dice from '../dice/Dice'
 import './assests/css/player.css'
 
-const Player = ({ state, dispatch, ACTIONS, player }) => {
+const Player = ({ state, dispatch, ACTIONS, player, opposingPlayer }) => {
   let { playerNumber, selectedDice, name, tokens } = player
   let [diceRolls, setDiceRolls] = useState([])
   const dice = ['4', '6', '8', '10', '12', '20']
@@ -75,7 +76,10 @@ const Player = ({ state, dispatch, ACTIONS, player }) => {
   }
 
   return (
-    <div className='player--container'>
+    <motion.div
+      className='player--container'
+      animate={{ color: player.color ? `${player.color}` : '#FFFFFF' }}
+    >
       <h2>{name}</h2>
       <div className='dice--container'>
         <div className='dice-title'>
@@ -102,9 +106,15 @@ const Player = ({ state, dispatch, ACTIONS, player }) => {
       <div className='player--item--container'>
         <h3>Items</h3>
         <div className='items--container'>
-          {player.items?.map((item) => {
+          {Object.keys(player.items).map((item) => {
             return (
-              <PlayerItems key={`${item}-${player.name}`} item={item} />
+              <PlayerItems
+                key={`${player.items[item].name}-${player.name}`}
+                item={player.items[item]}
+                player={player}
+                opposingPlayer={opposingPlayer}
+                state={state}
+              />
             )
           })}
         </div>
@@ -122,7 +132,7 @@ const Player = ({ state, dispatch, ACTIONS, player }) => {
           )
         }))}
       </div>
-    </div>
+    </motion.div>
   )
 }
 

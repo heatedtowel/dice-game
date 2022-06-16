@@ -18,7 +18,8 @@ export const ACTIONS = {
   playerDiceRemoval: 'playerDiceRemoval',
   playerRoll: 'playerRoll',
   purchaseItem: 'purchaseItem',
-  useItem: 'useItem',
+  playerItemRemoval: 'playerItemRemoval',
+  minusOpponentTokens: 'minusOpponentTokens',
   win: 'win',
 }
 
@@ -75,15 +76,15 @@ export function reducer(state, action) {
       }
       return itemAddition
     case 'playerItemRemoval':
-      let ItemRemoval = {
+      console.log(payload.item)
+      let itemRemoval = {
         ...state,
       };
-      ItemRemoval[`player${payload.playerNumber}`] = {
+      itemRemoval[`player${payload.playerNumber}`] = {
         ...state[`player${payload.playerNumber}`],
-        selectedDice: [...state[`player${payload.playerNumber}`].selectedDice.filter(dice => dice !== payload.die)],
-        tokens: payload.tokens
+        items: [...state[`player${payload.playerNumber}`].items.filter(item => item.name !== payload.item)],
       }
-      return ItemRemoval
+      return itemRemoval
     case 'playerRoll':
       let playerRoll = {
         ...state,
@@ -96,6 +97,15 @@ export function reducer(state, action) {
         tokens: payload.tokens + state.tokensPerTurn
       }
       return playerRoll
+    case 'minusOpponentTokens':
+      let opponentTokens = {
+        ...state,
+      };
+      opponentTokens[`player${payload.opposingPlayer}`] = {
+        ...state[`player${payload.opposingPlayer}`],
+        tokens: state[`player${payload.opposingPlayer}`].tokens - payload.minusTokenAmmount
+      }
+      return opponentTokens
     default:
       throw new Error();
   };

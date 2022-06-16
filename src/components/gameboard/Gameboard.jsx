@@ -12,7 +12,8 @@ import './css/gameboard.css';
 
 const Gameboard = ({ initialState, state, dispatch, ACTIONS }) => {
   const [hasSetName, setHasSetName] = useState(false)
-  const difficulties = ['easy', 'medium', 'hard'];
+  const difficulties = ['short', 'medium', 'long'];
+  //build out difficulty class
 
   return (
     <>
@@ -37,6 +38,7 @@ const Gameboard = ({ initialState, state, dispatch, ACTIONS }) => {
             <Player
               state={state}
               player={state.player1}
+              opposingPlayer={state.player2}
               dispatch={dispatch}
               ACTIONS={ACTIONS}
             />
@@ -63,6 +65,7 @@ const Gameboard = ({ initialState, state, dispatch, ACTIONS }) => {
             <Player
               state={state}
               player={state.player2}
+              opposingPlayer={state.player1}
               dispatch={dispatch}
               ACTIONS={ACTIONS}
             />
