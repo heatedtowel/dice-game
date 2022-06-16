@@ -1,6 +1,7 @@
 export default class Player {
   constructor(playerNumber) {
     this.name = ''
+    this.color = ''
     this.selectedDice = []
     this.playerNumber = playerNumber
     this.items = []
@@ -17,6 +18,10 @@ export default class Player {
 
   setName(name) {
     this.name = name
+  }
+
+  setColor(color) {
+    this.color = color
   }
 
   static getTokens() {

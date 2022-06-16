@@ -3,6 +3,7 @@
   flex-flow: column wrap;
   justify-content: center;
   align-items: center;
+  gap: 2rem;
 }
 
 .dice--container {

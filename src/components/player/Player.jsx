@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import PlayerItems from '../playerItems/PlayerItems'
 import Dice from '../dice/Dice'
 import './assests/css/player.css'
 
@@ -75,9 +76,7 @@ const Player = ({ state, dispatch, ACTIONS, player }) => {
 
   return (
     <div className='player--container'>
-      <div>
-        <h2>{name}</h2>
-      </div>
+      <h2>{name}</h2>
       <div className='dice--container'>
         <div className='dice-title'>
           <h3>Available Dice</h3>
@@ -96,16 +95,18 @@ const Player = ({ state, dispatch, ACTIONS, player }) => {
             )
           })}
         </div>
+      </div>
+      <div>
         <h3>Tokens: {player.tokens}</h3>
-        <div className='container'>
-          <h3>Items</h3>
-          <div className='items--container'>
-            {player.items?.map((item) => {
-              return (
-                <h5>{item}</h5>
-              )
-            })}
-          </div>
+      </div>
+      <div className='player--item--container'>
+        <h3>Items</h3>
+        <div className='items--container'>
+          {player.items?.map((item) => {
+            return (
+              <PlayerItems key={`${item}-${player.name}`} item={item} />
+            )
+          })}
         </div>
       </div>
       <button
