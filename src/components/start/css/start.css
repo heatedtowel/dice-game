@@ -1,4 +1,5 @@
-.btn {
+.start--btn,
+.reset--btn {
   font-size: 1.5vw;
   padding: .3rem .5rem;
   margin-bottom: 1rem;

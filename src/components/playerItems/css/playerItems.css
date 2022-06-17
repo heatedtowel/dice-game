@@ -1,0 +1,6 @@
+.player--item {
+  font-size: .8vw;
+  padding: .3rem .5rem;
+  border-radius: .5rem;
+  cursor: pointer;
+}

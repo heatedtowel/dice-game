@@ -2,11 +2,12 @@ import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import PlayerItems from '../playerItems/PlayerItems'
 import Dice from '../dice/Dice'
-import './assests/css/player.css'
+import './css/player.css'
 
 const Player = ({ state, dispatch, ACTIONS, player, opposingPlayer }) => {
   let { playerNumber, selectedDice, name, tokens } = player
   let [diceRolls, setDiceRolls] = useState([])
+  let [popup, setPopup] = useState(false)
   const dice = ['4', '6', '8', '10', '12', '20']
 
   useEffect(() => {
@@ -34,35 +35,40 @@ const Player = ({ state, dispatch, ACTIONS, player, opposingPlayer }) => {
           rollTotal += roll
         }
         setDiceRolls(currentRoll)
+        setPopup(player.items?.some(() => 'Re-Roll'))
 
-        if ((currentValue - rollTotal) < 0) {
+        if (!popup) {
+          console.log(!popup)
+          console.log('inside popup')
+          if ((currentValue - rollTotal) < 0) {
+            return dispatch({
+              type: ACTIONS.playerRoll,
+              payload: {
+                newNumber: currentValue,
+                playerNumber: playerNumber,
+                turn: playerName,
+                tokens: tokens
+              }
+            })
+          }
+          if ((currentValue - rollTotal) === 0) {
+            return dispatch({
+              type: ACTIONS.win,
+              payload: {
+                winner: playerName
+              }
+            })
+          }
           return dispatch({
             type: ACTIONS.playerRoll,
             payload: {
-              newNumber: currentValue,
+              newNumber: currentValue - rollTotal,
               playerNumber: playerNumber,
               turn: playerName,
               tokens: tokens
             }
           })
         }
-        if ((currentValue - rollTotal) === 0) {
-          return dispatch({
-            type: ACTIONS.win,
-            payload: {
-              winner: playerName
-            }
-          })
-        }
-        return dispatch({
-          type: ACTIONS.playerRoll,
-          payload: {
-            newNumber: currentValue - rollTotal,
-            playerNumber: playerNumber,
-            turn: playerName,
-            tokens: tokens
-          }
-        })
       }
       roll()
     }
@@ -75,64 +81,97 @@ const Player = ({ state, dispatch, ACTIONS, player, opposingPlayer }) => {
     return true
   }
 
+  const popupClickHandler = (answer, reRoll) => {
+    if (answer === 'Yes') {
+      handleRoll(state, selectedDice, name, playerNumber, tokens)
+    }
+    setPopup(false)
+  }
+
   return (
-    <motion.div
-      className='player--container'
-      animate={{ color: player.color ? `${player.color}` : '#FFFFFF' }}
-    >
-      <h2>{name}</h2>
-      <div className='dice--container'>
-        <div className='dice-title'>
-          <h3>Available Dice</h3>
+    <>
+      {popup &&
+        <div className='reRoll--popup--container'>
+          <div className='reRoll--popup'>
+            <h1>Would you like to use your Re-Roll item?</h1>
+            <button
+              className='popup--btn left'
+              onClick={(e) => popupClickHandler(e.target.innerText, player.items.find(() => 'Re-Roll'))}
+            >Yes
+            </button>
+            <button
+              className='popup--btn right'
+              onClick={(e) => popupClickHandler(e.target.innerText, player)}
+            >No
+            </button>
+            <div className='rollValues'>
+              {diceRolls.map((roll => {
+                return (
+                  <button className='diceResult'>{roll}</button>
+                )
+              }))}
+            </div>
+          </div>
         </div>
-        <div className='dice'>
-          {dice.map((die) => {
+      }
+      <motion.div
+        className='player--container'
+        animate={{ color: player.color ? `${player.color}` : '#FFFFFF' }}
+      >
+        <h2>{name}</h2>
+        <div className='dice--container'>
+          <div className='dice-title'>
+            <h3>Available Dice</h3>
+          </div>
+          <div className='dice'>
+            {dice.map((die) => {
+              return (
+                <Dice
+                  key={die}
+                  die={die}
+                  state={state}
+                  player={player}
+                  dispatch={dispatch}
+                  ACTIONS={ACTIONS}
+                />
+              )
+            })}
+          </div>
+        </div>
+        <div>
+          <h3>Tokens: {player.tokens}</h3>
+        </div>
+        {player.items.length > 0 && <div className='player--items--container'>
+          <h3 className='items--title'>Items</h3>
+          <div className='item--container'>
+            {Object.keys(player.items).map((item) => {
+              return (
+                <PlayerItems
+                  key={`${player.items[item].name}-${player.name}`}
+                  item={player.items[item]}
+                  player={player}
+                  opposingPlayer={opposingPlayer}
+                  state={state}
+                />
+              )
+            })}
+          </div>
+        </div>}
+        <button
+          disabled={handleDisabled(state)}
+          className='roll--btn'
+          onClick={() => handleRoll(state, selectedDice, name, playerNumber, tokens)}
+        > Roll
+        </button>
+        <div className='rollValues'>
+          {diceRolls.map((roll => {
             return (
-              <Dice
-                key={die}
-                die={die}
-                state={state}
-                player={player}
-                dispatch={dispatch}
-                ACTIONS={ACTIONS}
-              />
+              <button className='diceResult'>{roll}</button>
             )
-          })}
+          }))}
         </div>
-      </div>
-      <div>
-        <h3>Tokens: {player.tokens}</h3>
-      </div>
-      <div className='player--item--container'>
-        <h3>Items</h3>
-        <div className='items--container'>
-          {Object.keys(player.items).map((item) => {
-            return (
-              <PlayerItems
-                key={`${player.items[item].name}-${player.name}`}
-                item={player.items[item]}
-                player={player}
-                opposingPlayer={opposingPlayer}
-                state={state}
-              />
-            )
-          })}
-        </div>
-      </div>
-      <button
-        disabled={handleDisabled(state)}
-        className='btn'
-        onClick={() => handleRoll(state, selectedDice, name, playerNumber, tokens)}
-      > Roll
-      </button>
-      <div className='rollValues'>
-        {diceRolls.map((roll => {
-          return (
-            <button className='diceResult'>{roll}</button>
-          )
-        }))}
-      </div>
-    </motion.div>
+      </motion.div>
+    </>
   )
 }
 

@@ -32,6 +32,10 @@ export default class Player {
     this.tokens = num
   }
 
+  addTokens(tokensToAdd) {
+    this.tokens += tokensToAdd
+  }
+
   addItem(newItem) {
     this.items.push(newItem)
   }

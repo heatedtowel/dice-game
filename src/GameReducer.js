@@ -20,6 +20,8 @@ export const ACTIONS = {
   purchaseItem: 'purchaseItem',
   playerItemRemoval: 'playerItemRemoval',
   minusOpponentTokens: 'minusOpponentTokens',
+  skipTurn: 'skipTurn',
+  giftBasket: 'giftBasket',
   win: 'win',
 }
 
@@ -106,6 +108,21 @@ export function reducer(state, action) {
         tokens: state[`player${payload.opposingPlayer}`].tokens - payload.minusTokenAmmount
       }
       return opponentTokens
+    case 'giftBasket':
+      let giftBasket = {
+        ...state,
+      };
+      giftBasket[`player${payload.playerNumber}`] = {
+        ...state[`player${payload.playerNumber}`],
+        tokens: state.player1.tokens + payload.additionalTokens
+      }
+      return giftBasket
+    case 'skipTurn':
+      let skipTurn = {
+        ...state,
+        turn: payload.turn
+      };
+      return skipTurn
     default:
       throw new Error();
   };

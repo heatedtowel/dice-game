@@ -1,6 +1,6 @@
 import React from 'react';
 import { VscDebugRestart } from 'react-icons/vsc'
-import './assets/css/start.css'
+import './css/start.css'
 
 const Start = ({ dispatch, state, ACTIONS, setHasSetName }) => {
 
@@ -8,9 +8,9 @@ const Start = ({ dispatch, state, ACTIONS, setHasSetName }) => {
     let min;
     if (state.start !== true && state.difficulty !== '') {
       switch (difficulty) {
-        case 'short':
-          state.player1.setTokens(3)
-          state.player2.setTokens(3)
+        case 'Short':
+          state.player1.setTokens(100)
+          state.player2.setTokens(100)
           min = 1
           dispatch({
             type: ACTIONS.start,
@@ -20,7 +20,7 @@ const Start = ({ dispatch, state, ACTIONS, setHasSetName }) => {
             }
           })
           break;
-        case 'medium':
+        case 'Medium':
           state.player1.setTokens(3)
           state.player2.setTokens(3)
           min = 50
@@ -32,7 +32,7 @@ const Start = ({ dispatch, state, ACTIONS, setHasSetName }) => {
             }
           })
           break;
-        case 'long':
+        case 'Long':
           state.player1.setTokens(3)
           state.player2.setTokens(3)
           min = 100
@@ -66,13 +66,13 @@ const Start = ({ dispatch, state, ACTIONS, setHasSetName }) => {
   return (
     <>
       <button
-        className='btn'
+        className='start--btn'
         disabled={state.start ? true : false}
         onClick={() => handleStart(state.difficulty)}
       >Start
       </button>
       <button
-        className='btn'
+        className='reset--btn'
         onClick={() => handleReset()}
       ><VscDebugRestart />
       </button>

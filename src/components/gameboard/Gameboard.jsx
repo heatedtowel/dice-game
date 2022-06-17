@@ -12,7 +12,7 @@ import './css/gameboard.css';
 
 const Gameboard = ({ initialState, state, dispatch, ACTIONS }) => {
   const [hasSetName, setHasSetName] = useState(false)
-  const difficulties = ['short', 'medium', 'long'];
+  const difficulties = ['Short', 'Medium', 'Long'];
   //build out difficulty class
 
   return (
@@ -44,6 +44,7 @@ const Gameboard = ({ initialState, state, dispatch, ACTIONS }) => {
             />
             <div className='btn--container'>
               <NumberGenerator randomNumber={state.initialNumber} />
+              <h3>Game Length</h3>
               <div className='difficulty--container'>
                 {difficulties.map((difficulty) =>
                   <DifficultyButton

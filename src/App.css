@@ -1,14 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Joan&display=swap');
 
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+  font-family: 'Joan', serif;
+  letter-spacing: .1rem;
 }
 
 .App {
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .App-body {
@@ -19,5 +20,6 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #FFFCF9;
+
 }

@@ -1,0 +1,106 @@
+.player--container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.dice--container {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.dice {
+  display: flex;
+  gap: 1rem;
+}
+
+.dice-title {
+  height: min-content;
+  border-bottom: .1rem solid #FF6978;
+  margin-bottom: 1rem;
+
+}
+
+.roll--btn {
+  font-size: 1.5vw;
+  padding: .3rem .5rem;
+  margin-bottom: 1rem;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+.rollValues {
+  display: flex;
+  gap: 2rem;
+}
+
+.diceResult {
+  font-size: 3vw;
+  padding: .3rem 1rem;
+  border-radius: .5rem;
+}
+
+.player--items--container {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr 1fr;
+  border: .1rem solid #FF6978;
+  background-color: #788585;
+  border-radius: .5rem;
+  padding: .5rem;
+}
+
+.item--container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: .5rem;
+  padding: .2rem;
+  margin: 0 auto;
+}
+
+.items--title {
+  align-self: start;
+}
+
+.reRoll--popup--container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  padding: 6vw;
+  border-radius: .5rem;
+  background-color: #00000097;
+}
+
+.reRoll--popup {
+  padding: 2rem;
+  border-radius: 1rem;
+  background-color: #FF6978;
+}
+
+.popup--btn {
+  padding: 1rem;
+  margin-top: 1rem;
+  cursor: pointer;
+}
+
+.left {
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+}
+
+.right {
+  border-top-right-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+}
