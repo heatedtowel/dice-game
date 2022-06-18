@@ -44,7 +44,7 @@ const Gameboard = ({ initialState, state, dispatch, ACTIONS }) => {
             />
             <div className='btn--container'>
               <NumberGenerator randomNumber={state.initialNumber} />
-              <h3>Game Length</h3>
+              <h4>Game Length</h4>
               <div className='difficulty--container'>
                 {difficulties.map((difficulty) =>
                   <DifficultyButton

@@ -1,8 +1,14 @@
-.start--btn,
-.reset--btn {
-  font-size: 1.5vw;
+.start--btn {
+  font-size: 1vw;
   padding: .3rem .5rem;
-  margin-bottom: 1rem;
+  border-radius: .5rem;
+  cursor: pointer;
+}
+
+.reset--btn {
+  display: flex;
+  font-size: 1vw;
+  padding: .3rem .5rem;
   border-radius: .5rem;
   cursor: pointer;
 }

@@ -1,14 +1,15 @@
 .btn-selected {
   background-color: #5DA9E9;
-  font-size: 1.5vw;
+  font-size: 1vw;
   padding: .3rem .5rem;
   margin-bottom: 1rem;
   border-radius: .5rem;
   cursor: pointer;
+  transition: all .5s;
 }
 
 .btn-unselected {
-  font-size: 2vw;
+  font-size: 1vw;
   padding: .3rem .5rem;
   margin-bottom: 1rem;
   border-radius: .5rem;

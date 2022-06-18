@@ -1,12 +1,13 @@
 .shop--container {
   display: grid;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 2fr;
   align-items: center;
   justify-content: center;
-  padding: .5rem 1rem;
+  padding: 1rem;
   border-radius: .5rem;
   width: max-content;
-  margin: 3rem auto;
+  margin: 0 auto;
+  margin-bottom: 1rem;
 
 }
 
@@ -38,9 +39,7 @@
   cursor: pointer;
 }
 
-.shopTitle {
-  height: max-content;
-}
+.shopTitle {}
 
 .shop--item--container {
   display: flex;

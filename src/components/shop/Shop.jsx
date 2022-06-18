@@ -5,21 +5,8 @@ const Shop = ({ state, dispatch, ACTIONS }) => {
     'Re-Roll': {
       name: 'Re-Roll',
       price: 2,
-      effect: function (playerNumber, opposingPlayer, itemToRemove) {
-        // dispatch({
-        //   type: ACTIONS.,
-        //   payload: {
-        //     opposingPlayer: opposingPlayer,
-        //     minusTokenAmmount: 1
-        //   }
-        // })
-        dispatch({
-          type: ACTIONS.playerItemRemoval,
-          payload: {
-            item: itemToRemove,
-            playerNumber: playerNumber
-          }
-        })
+      effect: function () {
+        return null
       }
     },
     'Skip Turn': {
@@ -88,8 +75,8 @@ const Shop = ({ state, dispatch, ACTIONS }) => {
 
   const handlePowerUps = (player, key, cost) => {
     let existingItem = player.items?.find((itemKey) => key === itemKey.name)
-    if ((player.tokens >= cost) && !existingItem) {
-      let newTokenCount = player.tokens - cost
+    let newTokenCount = player.tokens - cost
+    if ((newTokenCount > 0) && !existingItem) {
       dispatch({ type: ACTIONS.purchaseItem, payload: { item: shopContents[key], tokens: newTokenCount, playerNumber: player.playerNumber } })
     }
   }

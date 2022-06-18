@@ -9,21 +9,16 @@ const Player = ({ state, dispatch, ACTIONS, player, opposingPlayer }) => {
   let [diceRolls, setDiceRolls] = useState([])
   let [popup, setPopup] = useState(false)
   const dice = ['4', '6', '8', '10', '12', '20']
-
-  useEffect(() => {
-    if (!state.start) {
-      setDiceRolls([])
-    }
-  }, [state.start])
-
+  let rollTotal = 0
 
   const handleRoll = (state, selectedDice, playerName, playerNumber, tokens) => {
     const { start, initialNumber } = state
 
     if ((selectedDice.length > 0 && start) || tokens === 0) {
       const currentValue = initialNumber
+      rollDice()
 
-      const roll = () => {
+      function rollDice() {
         let currentRoll = []
         let rollTotal = 0
 
@@ -37,41 +32,59 @@ const Player = ({ state, dispatch, ACTIONS, player, opposingPlayer }) => {
         setDiceRolls(currentRoll)
         setPopup(player.items?.some(() => 'Re-Roll'))
 
-        if (!popup) {
-          console.log(!popup)
-          console.log('inside popup')
-          if ((currentValue - rollTotal) < 0) {
-            return dispatch({
-              type: ACTIONS.playerRoll,
-              payload: {
-                newNumber: currentValue,
-                playerNumber: playerNumber,
-                turn: playerName,
-                tokens: tokens
-              }
-            })
-          }
-          if ((currentValue - rollTotal) === 0) {
-            return dispatch({
-              type: ACTIONS.win,
-              payload: {
-                winner: playerName
-              }
-            })
-          }
-          return dispatch({
-            type: ACTIONS.playerRoll,
-            payload: {
-              newNumber: currentValue - rollTotal,
-              playerNumber: playerNumber,
-              turn: playerName,
-              tokens: tokens
-            }
-          })
-        }
+        if (!player.items?.some(() => 'Re-Roll'))
+          submitRoll(rollTotal, popup, currentValue, playerName, playerNumber)
       }
-      roll()
     }
+  }
+
+  function submitRoll(rollTotal, popup, currentValue, playerName, playerNumber) {
+    if ((currentValue - rollTotal) < 0 && !popup) {
+      return dispatch({
+        type: ACTIONS.playerRoll,
+        payload: {
+          newNumber: currentValue,
+          playerNumber: playerNumber,
+          turn: playerName,
+          tokens: tokens
+        }
+      })
+    }
+    if ((currentValue - rollTotal) === 0) {
+      return dispatch({
+        type: ACTIONS.win,
+        payload: {
+          winner: playerName
+        }
+      })
+    }
+    return dispatch({
+      type: ACTIONS.playerRoll,
+      payload: {
+        newNumber: currentValue - rollTotal,
+        playerNumber: playerNumber,
+        turn: playerName,
+        tokens: tokens
+      }
+    })
+  }
+
+  const popupClickHandler = (answer) => {
+    if (answer === 'Yes') {
+      dispatch({
+        type: ACTIONS.playerItemRemoval,
+        payload: {
+          playerNumber: playerNumber,
+          item: 'Re-Roll'
+        }
+      })
+      console.log('true', '\n', state, '\n', selectedDice, '\n', name, '\n', playerNumber, '\n', tokens)
+      setPopup(player.items?.some(() => 'Re-Roll'))
+      return handleRoll(state, selectedDice, name, playerNumber, tokens)
+    }
+    setPopup(false)
+    console.log('false', '\n', rollTotal, '\n', popup, '\n', state.initialNumber, '\n', name, '\n', playerNumber)
+    submitRoll(rollTotal, popup, state.initialNumber, name, playerNumber)
   }
 
   const handleDisabled = ({ start }) => {
@@ -79,13 +92,6 @@ const Player = ({ state, dispatch, ACTIONS, player, opposingPlayer }) => {
       return false
     }
     return true
-  }
-
-  const popupClickHandler = (answer, reRoll) => {
-    if (answer === 'Yes') {
-      handleRoll(state, selectedDice, name, playerNumber, tokens)
-    }
-    setPopup(false)
   }
 
   return (
@@ -96,7 +102,7 @@ const Player = ({ state, dispatch, ACTIONS, player, opposingPlayer }) => {
             <h1>Would you like to use your Re-Roll item?</h1>
             <button
               className='popup--btn left'
-              onClick={(e) => popupClickHandler(e.target.innerText, player.items.find(() => 'Re-Roll'))}
+              onClick={(e) => popupClickHandler(e.target.innerText,)}
             >Yes
             </button>
             <button
