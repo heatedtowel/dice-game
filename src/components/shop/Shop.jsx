@@ -90,7 +90,7 @@ const Shop = ({ state, dispatch, ACTIONS }) => {
     <>
       <div className='shop--container'>
         <div>
-          <h2 className='shopTitle'>Shop</h2>
+          <h2 className='shopTitle'>Item Shop</h2>
         </div>
         <div className='shop--item--container'>
           {Object.keys(shopContents).map((key) => {

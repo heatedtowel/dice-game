@@ -1,18 +1,19 @@
 .shop--container {
-  display: grid;
-  grid-template-rows: 1fr 2fr;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
+  gap: 1rem;
   padding: 1rem;
   border-radius: .5rem;
-  width: max-content;
   margin: 0 auto;
   margin-bottom: 1rem;
-
 }
 
 .shopItem {
   display: flex;
+  flex: 0 0 13em;
   flex-direction: column;
   border: .1rem solid #FF6978;
   background-color: #788585;
@@ -39,9 +40,9 @@
   cursor: pointer;
 }
 
-.shopTitle {}
-
 .shop--item--container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem
 }
