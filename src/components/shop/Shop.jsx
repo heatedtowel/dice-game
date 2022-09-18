@@ -1,10 +1,12 @@
 import './css/shop.css'
 
 const Shop = ({ state, dispatch, ACTIONS }) => {
+  console.log(state.player1)
   const shopContents = {
     'Re-Roll': {
       name: 'Re-Roll',
       price: 2,
+      description: 'Allows a reroll of the entire turn',
       effect: function () {
         return null
       }
@@ -12,6 +14,7 @@ const Shop = ({ state, dispatch, ACTIONS }) => {
     'Skip Turn': {
       name: 'Skip Turn',
       price: 1,
+      description: 'Skips current turn without rolling',
       effect: function (playerNumber, opposingPlayer, itemToRemove, currentPlayer) {
         dispatch({
           type: ACTIONS.skipTurn,
@@ -30,7 +33,8 @@ const Shop = ({ state, dispatch, ACTIONS }) => {
     },
     'Opponent Loses A Token': {
       name: 'Opponent Loses A Token',
-      price: 5,
+      price: 4,
+      description: 'Opposing player loses 1 token',
       effect: function (playerNumber, opposingPlayer, itemToRemove) {
         dispatch({
           type: ACTIONS.minusOpponentTokens,
@@ -51,9 +55,10 @@ const Shop = ({ state, dispatch, ACTIONS }) => {
     'Gift Basket': {
       name: 'Gift Basket',
       price: 5,
+      description: 'Contains 2 - 10 tokens',
       effect: function (playerNumber, opposingPlayer, itemToRemove) {
         let max = 10
-        let min = 5
+        let min = 2
         let total = Math.floor(Math.random() * (max - min + 1) + min)
         dispatch({
           type: ACTIONS.giftBasket,
@@ -93,6 +98,7 @@ const Shop = ({ state, dispatch, ACTIONS }) => {
               <div key={key} className='shopItem'>
                 <h5>{key}</h5>
                 <h5>{shopContents[key].price} {shopContents[key].price > 1 ? 'Tokens' : 'Token'}</h5>
+                <h5>{shopContents[key].description}</h5>
                 <div>
                   <button
                     className='shop--purchase--p1--btn'

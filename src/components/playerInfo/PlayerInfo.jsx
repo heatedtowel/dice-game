@@ -50,7 +50,7 @@ const WinScreen = ({ initialState, setHasSetName }) => {
               style={{ color: (player1Info.name.length >= 3) ? 'green' : 'red' }}
               type="text"
               placeholder='please choose a name'
-              onChange={(e) => setplayer1Info(prev => ({ ...prev, name: e.target.value }))}
+              onChange={(e) => setplayer1Info(prev => ({ ...prev, name: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1) }))}
             />
             <input
               className='player--color'
@@ -63,7 +63,7 @@ const WinScreen = ({ initialState, setHasSetName }) => {
               style={{ color: (player2Info.name.length >= 3) ? 'green' : 'red' }}
               type="text"
               placeholder='please choose a name'
-              onChange={(e) => setplayer2Info(prev => ({ ...prev, name: e.target.value }))}
+              onChange={(e) => setplayer2Info(prev => ({ ...prev, name: e.target.value.charAt(0).toUpperCase() + e.target.value.slice(1) }))}
             />
             <input
               className='player--color'
