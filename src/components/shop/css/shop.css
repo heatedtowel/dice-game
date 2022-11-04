@@ -42,7 +42,12 @@
 
 .shop--item--container {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   gap: 1rem
+}
+
+@media screen and (max-width: 1260px) {
+  .shop--item--container {
+    flex-wrap: wrap;
+  }
 }

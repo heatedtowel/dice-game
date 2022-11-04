@@ -5,8 +5,8 @@ const Shop = ({ state, dispatch, ACTIONS }) => {
   const shopContents = {
     'Re-Roll': {
       name: 'Re-Roll',
-      price: 2,
-      description: 'Allows a reroll of the entire turn',
+      price: 3,
+      description: 'Reroll dice',
       effect: function () {
         return null
       }
@@ -14,7 +14,7 @@ const Shop = ({ state, dispatch, ACTIONS }) => {
     'Skip Turn': {
       name: 'Skip Turn',
       price: 1,
-      description: 'Skips current turn without rolling',
+      description: 'Skips current turn',
       effect: function (playerNumber, opposingPlayer, itemToRemove, currentPlayer) {
         dispatch({
           type: ACTIONS.skipTurn,
@@ -34,13 +34,13 @@ const Shop = ({ state, dispatch, ACTIONS }) => {
     'Opponent Loses A Token': {
       name: 'Opponent Loses A Token',
       price: 4,
-      description: 'Opposing player loses 1 token',
+      description: '1-4 tokens are lost',
       effect: function (playerNumber, opposingPlayer, itemToRemove) {
         dispatch({
           type: ACTIONS.minusOpponentTokens,
           payload: {
             opposingPlayer: opposingPlayer,
-            minusTokenAmmount: 1
+            minusTokenAmmount: Math.floor(Math.random() * (4 - 0 + 1) + 0)
           }
         })
         dispatch({
@@ -54,10 +54,10 @@ const Shop = ({ state, dispatch, ACTIONS }) => {
     },
     'Gift Basket': {
       name: 'Gift Basket',
-      price: 5,
-      description: 'Contains 2 - 10 tokens',
+      price: 3,
+      description: 'Contains 2 - 6 tokens',
       effect: function (playerNumber, opposingPlayer, itemToRemove) {
-        let max = 10
+        let max = 6
         let min = 2
         let total = Math.floor(Math.random() * (max - min + 1) + min)
         dispatch({
@@ -97,7 +97,7 @@ const Shop = ({ state, dispatch, ACTIONS }) => {
             return (
               <div key={key} className='shopItem'>
                 <h5>{key}</h5>
-                <h5>{shopContents[key].price} {shopContents[key].price > 1 ? 'Tokens' : 'Token'}</h5>
+                <h5>Cost : {shopContents[key].price} {shopContents[key].price > 1 ? 'Tokens' : 'Token'}</h5>
                 <h5>{shopContents[key].description}</h5>
                 <div>
                   <button

@@ -40,7 +40,7 @@ export default class Player {
     this.items.push(newItem)
   }
 
-  removeItem(removedItem) {
-    this.items.filter((item) => item !== removedItem)
+  removeItem(item) {
+    this.items.filter((currentItems) => currentItems !== item)
   }
 }
